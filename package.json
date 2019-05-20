@@ -1,21 +1,21 @@
 {
-  "name": "api-gateway-example",
-  "version": "1.0.0",
-  "description": "Contoh API Gateway menggunakan ExpressJS",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "nodejs",
-    "expressjs",
-    "api-gateway"
-  ],
-  "author": "Angger Priyardhan Putro",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.18.0",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.0"
-  }
+	"name": "api-gateway-boilerplate",
+	"version": "1.0.0",
+	"description": "API Gateway Boilerplate using ExpressJS",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+		"nodejs",
+		"expressjs",
+		"api-gateway"
+	],
+	"author": "Angger Priyardhan Putro",
+	"license": "ISC",
+	"dependencies": {
+		"axios": "^0.18.0",
+		"body-parser": "^1.19.0",
+		"express": "^4.17.0"
+	}
 }
