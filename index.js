@@ -7,7 +7,13 @@ const router = require("./routers/router");
 
 const app = express();
 
-app.use(helmet);
+if (app.get("env") === "development") {
+	const morgan = require("morgan");
+	app.use(morgan("tiny"));
+	console.log("Morgan enabled...");
+}
+
+app.use(helmet());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
