@@ -1,10 +1,10 @@
+const config = require("config");
 const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
 const userRepo = require("../repositories/UserRepository");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const config = require("../config");
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
@@ -18,9 +18,13 @@ router.post("/register", (req, res) => {
 			})
 			.then(userid => {
 				userRepo.getById(userid).then(user => {
-					const token = jwt.sign({ id: userid }, config.secret, {
-						expiresIn: 86400
-					});
+					const token = jwt.sign(
+						{ id: userid },
+						config.get("jwt.secret"),
+						{
+							expiresIn: 86400
+						}
+					);
 
 					res.status(200).send({
 						auth: true,
@@ -57,9 +61,13 @@ router.post("/login", (req, res) => {
 				if (!passwordIsValid)
 					return res.status(401).send({ auth: false, token: null });
 
-				const token = jwt.sign({ id: user.id }, config.secret, {
-					expiresIn: 86400
-				});
+				const token = jwt.sign(
+					{ id: user.id },
+					config.get("jwt.secret"),
+					{
+						expiresIn: 86400
+					}
+				);
 
 				res.status(200).send({ auth: true, token: token });
 			})

@@ -1,9 +1,11 @@
+const config = require("config");
+
 module.exports = {
-	client: "mysql",
+	client: config.get("db.type"),
 	connection: {
-		host: "127.0.0.1",
-		user: "angger",
-		password: "",
-		database: "express_gateway"
+		host: config.get("db.host"),
+		user: config.get("db.user"),
+		password: config.get("db.password"),
+		database: config.get("db.db_name")
 	}
 };

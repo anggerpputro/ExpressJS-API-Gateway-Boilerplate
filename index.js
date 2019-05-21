@@ -1,10 +1,5 @@
 const express = require("express");
 
-const helmet = require("helmet");
-const bodyParser = require("body-parser");
-
-const router = require("./routers/router");
-
 const app = express();
 
 if (app.get("env") === "development") {
@@ -13,8 +8,10 @@ if (app.get("env") === "development") {
 	console.log("Morgan enabled...");
 }
 
+const helmet = require("helmet");
 app.use(helmet());
 
+const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -22,6 +19,7 @@ app.get("/", (req, res) => {
 	res.send("Simple API Gateway");
 });
 
+const router = require("./routers/router");
 app.use(router);
 
 console.log("Simple API Gateway run on localhost:3000");
