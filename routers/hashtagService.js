@@ -6,9 +6,7 @@ const BASE_URL = "http://localhost:8089";
 const api = apiAdapter(BASE_URL);
 
 router.get("/hashtags", (req, res) => {
-	api.get(req.path).then(resp => {
-		res.send(resp.data);
-	});
+	res.send("HASHTAG");
 });
 
 router.get("/hashtags/:name", (req, res) => {

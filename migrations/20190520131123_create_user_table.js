@@ -4,6 +4,8 @@ exports.up = function(knex, Promise) {
 		t.string("username").notNullable();
 		t.string("password").notNullable();
 		t.timestamps(false, true);
+
+		t.unique("username");
 	});
 };
 
