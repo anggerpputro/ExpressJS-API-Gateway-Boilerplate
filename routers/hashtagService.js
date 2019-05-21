@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const apiAdapter = require("./apiAdapter");
+const authMiddleware = require("../middleware/Authenticate");
 
 const BASE_URL = "http://localhost:8089";
 const api = apiAdapter(BASE_URL);
