@@ -1,7 +1,13 @@
 const express = require("express");
-const app = express();
-const router = require("./routers/router");
+
+const helmet = require("helmet");
 const bodyParser = require("body-parser");
+
+const router = require("./routers/router");
+
+const app = express();
+
+app.use(helmet);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
