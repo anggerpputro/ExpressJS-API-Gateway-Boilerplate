@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.use(require("../controllers/AuthController"));
 
+router.use(require("./modules/home"));
+
 router.use("/api/feeds", require("./modules/feeds"));
 router.use("/api/hashtags", require("./modules/hashtags"));
 
