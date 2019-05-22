@@ -1,17 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-const feedService = require("./feedService");
-const hashtagService = require("./hashtagService");
-const authRouter = require("../controllers/AuthController");
-
 // router.use((req, res, next) => {
 // 	console.log("Called: ", req.path);
 // 	next();
 // });
 
-router.use(feedService);
-router.use(hashtagService);
-router.use(authRouter);
+router.use(require("../controllers/AuthController"));
+
+router.use("/api/feeds", require("./modules/feeds"));
+router.use("/api/hashtags", require("./modules/hashtags"));
 
 module.exports = router;
