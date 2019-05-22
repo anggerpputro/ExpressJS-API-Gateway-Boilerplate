@@ -1,4 +1,5 @@
 require("dotenv").config();
+const startupDebug = require("debug")("app:startup");
 
 const express = require("express");
 
@@ -7,7 +8,9 @@ const app = express();
 if (app.get("env") === "development") {
 	const morgan = require("morgan");
 	app.use(morgan("tiny"));
-	console.log("Morgan enabled...");
+	startupDebug("Morgan enabled...");
+} else {
+	startupDebug("Morgan disabled...");
 }
 
 const helmet = require("helmet");

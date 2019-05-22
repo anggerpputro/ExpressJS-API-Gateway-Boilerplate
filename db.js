@@ -13,7 +13,11 @@
 
 // module.exports = con;
 
+const debug = require("debug")("app:db");
+
 // using knex
 const knex = require("knex")(require("./knexfile"));
+
+debug("Connected to database...");
 
 module.exports = knex;
