@@ -1,4 +1,3 @@
-const config = require("config");
 const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
@@ -20,7 +19,7 @@ router.post("/register", (req, res) => {
 				userRepo.getById(userid).then(user => {
 					const token = jwt.sign(
 						{ id: userid },
-						config.get("jwt.secret"),
+						process.env.JWT_SECRET,
 						{
 							expiresIn: 86400
 						}
@@ -63,7 +62,7 @@ router.post("/login", (req, res) => {
 
 				const token = jwt.sign(
 					{ id: user.id },
-					config.get("jwt.secret"),
+					process.env.JWT_SECRET,
 					{
 						expiresIn: 86400
 					}

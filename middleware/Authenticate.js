@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const config = require("config");
 
 module.exports = (req, res, next) => {
 	if (!req.headers["authorization"]) {
@@ -7,7 +6,7 @@ module.exports = (req, res, next) => {
 	} else {
 		jwt.verify(
 			req.headers["authorization"],
-			config.get("jwt.secret"),
+			process.env.JWT_SECRET,
 			(err, decoded) => {
 				if (err) {
 					res.status(403).send("Forbidden");

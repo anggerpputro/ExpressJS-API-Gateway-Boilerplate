@@ -1,11 +1,9 @@
-const config = require("config");
-
 module.exports = {
-	client: config.get("db.type"),
+	client: process.env.DB_TYPE,
 	connection: {
-		host: config.get("db.host"),
-		user: config.get("db.user"),
-		password: config.get("db.password"),
-		database: config.get("db.db_name")
+		host: process.env.DB_HOST,
+		user: process.env.DB_USER,
+		password: process.env.DB_PASS,
+		database: process.env.DB_NAME
 	}
 };
