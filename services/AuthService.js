@@ -2,8 +2,12 @@ const userRepo = require.main.require("./repositories/UserRepository");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-const register = (username, password) => {
+const register = async (username, password) => {
+	const user = await userRepo.getByUsername(username);
+
 	return new Promise((resolve, reject) => {
+		if (user) reject(new Error("Username already exists!"));
+
 		userRepo
 			.create({
 				username: username,

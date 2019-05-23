@@ -7,7 +7,7 @@ const register = (req, res) => {
 			.then(result => res.status(200).send(result))
 			.catch(err => {
 				console.error(err);
-				return res.status(500).send("Registration failed");
+				return res.status(400).send(err.message);
 			});
 	} else {
 		console.error(req.body);
