@@ -1,27 +1,11 @@
 var express = require("express");
 var router = express.Router();
 
-const authMiddleware = require("../../middleware/Authenticate");
+const authMiddleware = require.main.require("./middleware/Authenticate");
+const feedsController = require.main.require("./controllers/FeedsController");
 
-const apiAdapter = require("../apiAdapter");
-const BASE_URL = "http://localhost:8088";
-const api = apiAdapter(BASE_URL);
-
-router.get("/", authMiddleware, (req, res) => {
-	res.send("FEEDS");
-});
-
-router.get("/:hashtag", authMiddleware, (req, res) => {
-	api.get(req.path).then(resp => {
-		res.send(resp.data);
-	});
-});
-
-router.post("/", authMiddleware, (req, res) => {
-	// api.get(req.path).then(resp => {
-	// 	res.send(resp.data);
-	// });
-	res.send("FEEDS");
-});
+router.get("/", authMiddleware, feedsController.index);
+router.get("/:hashtag", authMiddleware, feedsController.showHashtags);
+router.post("/", authMiddleware, feedsController.store);
 
 module.exports = router;

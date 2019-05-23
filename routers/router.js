@@ -6,9 +6,9 @@ const router = express.Router();
 // 	next();
 // });
 
-router.use(require("../controllers/AuthController"));
-
 router.use(require("./modules/home"));
+
+router.use(require("./modules/auth"));
 
 router.use("/api/feeds", require("./modules/feeds"));
 router.use("/api/hashtags", require("./modules/hashtags"));
