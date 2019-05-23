@@ -13,11 +13,34 @@
 
 // module.exports = con;
 
+// // using knex
+// const knex = require("knex")(require("./knexfile"));
+
+// debug("Connected to database...");
+
+// module.exports = knex;
+
 const debug = require("debug")("app:db");
 
-// using knex
-const knex = require("knex")(require("./knexfile"));
+const Sequelize = require("sequelize");
 
-debug("Connected to database...");
+const sequelize = new Sequelize(
+	process.env.DB_NAME,
+	process.env.DB_USER,
+	process.env.DB_PASS,
+	{
+		host: process.env.DB_HOST,
+		dialect: process.env.DB_TYPE
+	}
+);
 
-module.exports = knex;
+sequelize
+	.authenticate()
+	.then(() => {
+		debug("Connection to database has been established successfully.");
+	})
+	.catch(err => {
+		console.error("Unable to connect to the database:", err);
+	});
+
+module.exports = sequelize;

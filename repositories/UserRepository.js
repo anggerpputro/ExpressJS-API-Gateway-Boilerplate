@@ -2,17 +2,15 @@ const debug = require("debug")("app:db");
 
 const bcrypt = require("bcryptjs");
 
-const db = require("../db");
-const user = require("../models/User");
-
-const tableName = user.getTable();
+// const db = require.main.require("./db");
+const User = require.main.require("./models/User");
 
 const create = ({ username, password }) => {
 	let hashedPassword = bcrypt.hashSync(password, 8);
 
 	debug(`UserRepository::create -> username: ${username}`);
 
-	return db(tableName).insert({
+	return User.create({
 		username: username,
 		password: hashedPassword
 	});
@@ -23,12 +21,14 @@ const getById = (userid, showPassword = false) => {
 		`UserRepository::getById -> userid: ${userid}, showPassword: ${showPassword}`
 	);
 
-	const query = db(tableName).where("id", userid);
+	let attributes = ["id", "username"];
 	if (showPassword) {
-		return query.first("id", "username", "password");
-	} else {
-		return query.first("id", "username");
+		attributes = ["id", "username", "password"];
 	}
+	return User.findOne({
+		where: { id: userid },
+		attributes: attributes
+	});
 };
 
 const getByUsername = (username, showPassword = false) => {
@@ -36,12 +36,14 @@ const getByUsername = (username, showPassword = false) => {
 		`UserRepository::getByUsername -> username: ${username}, showPassword: ${showPassword}`
 	);
 
-	const query = db(tableName).where("username", username);
+	let attributes = ["id", "username"];
 	if (showPassword) {
-		return query.first("id", "username", "password");
-	} else {
-		return query.first("id", "username");
+		attributes = ["id", "username", "password"];
 	}
+	return User.findOne({
+		where: { username: username },
+		attributes: attributes
+	});
 };
 
 module.exports = {
