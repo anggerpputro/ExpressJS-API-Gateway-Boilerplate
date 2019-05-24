@@ -9,7 +9,8 @@ module.exports = (req, res, next) => {
 			process.env.JWT_SECRET,
 			(err, decoded) => {
 				if (err) {
-					res.status(403).send("Forbidden");
+					// res.status(403).send("Forbidden");
+					res.status(400).send("Invalid Token");
 				} else {
 					next();
 				}

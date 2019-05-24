@@ -16,6 +16,9 @@ if (process.env.APP_ENV == "local") {
 const helmet = require("helmet");
 app.use(helmet());
 
+const compression = require("compression");
+app.use(compression());
+
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
